@@ -6,7 +6,7 @@
   <li>plots functions of 1 variable </li>
   <li>plots a tangent line on a selected point of a function</li>
   <li>shows the formula of the tangent line</li>
-  <li>finds roots of the function by using the Newton-Raphson method</li>
+  <li>finds roots of a function by using the Newton-Raphson method</li>
 </ol>
 
 
