@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_f(x)viz" default="compile.module.f(x)viz">
+  <dirname property="module.f(x)viz.basedir" file="${ant.file.module_f(x)viz}"/>
+  
+  <property name="module.jdk.home.f(x)viz" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.f(x)viz" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.f(x)viz" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.f(x)viz" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="f(x)viz.output.dir" value="${module.f(x)viz.basedir}/out/production/F(x)Viz"/>
+  <property name="f(x)viz.testoutput.dir" value="${module.f(x)viz.basedir}/out/test/F(x)Viz"/>
+  
+  <path id="f(x)viz.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="f(x)viz.module.production.classpath">
+    <path refid="${module.jdk.classpath.f(x)viz}"/>
+  </path>
+  
+  <path id="f(x)viz.runtime.production.module.classpath">
+    <pathelement location="${f(x)viz.output.dir}"/>
+  </path>
+  
+  <path id="f(x)viz.module.classpath">
+    <path refid="${module.jdk.classpath.f(x)viz}"/>
+    <pathelement location="${f(x)viz.output.dir}"/>
+  </path>
+  
+  <path id="f(x)viz.runtime.module.classpath">
+    <pathelement location="${f(x)viz.testoutput.dir}"/>
+    <pathelement location="${f(x)viz.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.f(x)viz">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.f(x)viz">
+    <patternset refid="excluded.from.module.f(x)viz"/>
+  </patternset>
+  
+  <path id="f(x)viz.module.sourcepath">
+    <dirset dir="${module.f(x)viz.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.f(x)viz" depends="compile.module.f(x)viz.production,compile.module.f(x)viz.tests" description="Compile module F(x)Viz"/>
+  
+  <target name="compile.module.f(x)viz.production" depends="register.custom.compilers" description="Compile module F(x)Viz; production classes">
+    <mkdir dir="${f(x)viz.output.dir}"/>
+    <javac2 destdir="${f(x)viz.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.f(x)viz}/javac">
+      <compilerarg line="${compiler.args.f(x)viz}"/>
+      <bootclasspath refid="f(x)viz.module.bootclasspath"/>
+      <classpath refid="f(x)viz.module.production.classpath"/>
+      <src refid="f(x)viz.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.f(x)viz"/>
+    </javac2>
+    
+    <copy todir="${f(x)viz.output.dir}">
+      <fileset dir="${module.f(x)viz.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.f(x)viz.tests" depends="register.custom.compilers,compile.module.f(x)viz.production" description="compile module F(x)Viz; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.f(x)viz" description="cleanup module">
+    <delete dir="${f(x)viz.output.dir}"/>
+    <delete dir="${f(x)viz.testoutput.dir}"/>
+  </target>
+</project>

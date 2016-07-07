@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="F(x)Viz:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/F_x_Viz_jar</output-path>
+    <root id="archive" name="F(x)Viz.jar">
+      <element id="module-output" name="F(x)Viz" />
+    </root>
+  </artifact>
+</component>
