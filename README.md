@@ -13,3 +13,5 @@
 The program was written in Java, using JavaFX API
 
 The program uses CogPar mathematical expression parser from http://cogitolearning.co.uk/?page_id=677
+
+<img src="https://github.com/FireDweller/FunctionVisualiser/blob/master/screenshot1.JPG">
